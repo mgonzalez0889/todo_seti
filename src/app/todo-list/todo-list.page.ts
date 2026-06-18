@@ -16,8 +16,10 @@ import {
   ModalController
 } from '@ionic/angular/standalone';
 
-import { TodoService, TodoTask } from '../services/todo.service';
 import { TaskModalComponent } from './components/task-modal/task-modal.component';
+import { TaskService, TodoTask } from '../services/task.service';
+import { CategoryService } from '../services/category.service';
+import { NotificationService } from '../services/notification.Service';
 
 @Component({
   selector: 'app-todo-list',
@@ -47,8 +49,10 @@ export class TodoListPage {
   filteredTasks: TodoTask[] = [];
   categories: string[] = [];
 
-  private todoService = inject(TodoService);
   private modalCtrl = inject(ModalController);
+  private taskService = inject(TaskService);
+  private categoryService = inject(CategoryService);
+  private notificationService = inject(NotificationService);
 
   constructor() {
     this.loadData();
@@ -59,14 +63,14 @@ export class TodoListPage {
   }
 
   loadData() {
-    this.categories = this.todoService.getCategories();
-    this.tasks = this.todoService.getTasks();
+    this.categories = this.categoryService.getCategories();
+    this.tasks = this.taskService.getTasks();
     this.applyFilter();
   }
 
   applyFilter() {
     this.filteredTasks =
-      this.todoService.filterTasks(this.selectedCategory);
+      this.taskService.filterTasks(this.selectedCategory);
   }
 
   async openTaskModal() {
@@ -86,21 +90,32 @@ export class TodoListPage {
       return;
     }
 
-    this.todoService.addTask(
+    this.taskService.addTask(
       data.title,
       data.category
     );
 
+
     this.loadData();
+
+    await this.notificationService.success(
+      'Tarea creada correctamente'
+    );
   }
 
-  deleteTask(taskId: string) {
-    this.todoService.deleteTask(taskId);
+  async deleteTask(taskId: string) {
+    this.taskService.deleteTask(taskId);
     this.loadData();
+    await this.notificationService.success(
+    'Tarea eliminada correctamente'
+    );
   }
 
-  toggleComplete(taskId: string) {
-    this.todoService.toggleTaskComplete(taskId);
+  async toggleComplete(taskId: string) {
+    this.taskService.toggleTaskComplete(taskId);
     this.loadData();
+    await this.notificationService.success(
+    'Tarea completada correctamente'
+    );
   }
 }

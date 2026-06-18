@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -33,7 +33,7 @@ import {
   ],
   templateUrl: './task-modal.component.html'
 })
-export class TaskModalComponent {
+export class TaskModalComponent implements OnInit{
 
   @Input() categories: string[] = [];
 
@@ -41,6 +41,12 @@ export class TaskModalComponent {
   category = '';
 
   private modalCtrl = inject(ModalController);
+
+  ngOnInit() {
+    if (this.categories.length) {
+      this.category = this.categories[0];
+    }
+  }
 
   save() {
 

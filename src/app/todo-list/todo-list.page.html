@@ -9,6 +9,7 @@
   <ion-button
     expand="block"
     class="ion-margin-bottom"
+    [disabled]="categories.length === 0"
     (click)="openTaskModal()">
     Nueva tarea
   </ion-button>
@@ -87,7 +88,7 @@
   @if(filteredTasks.length === 0) {
 
     <p class="ion-text-center ion-margin-top">
-      No hay tareas en esta categoría
+      No hay tareas
     </p>
 
   }

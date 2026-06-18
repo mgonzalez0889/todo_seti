@@ -13,8 +13,10 @@ import {
   ModalController
 } from '@ionic/angular/standalone';
 
-import { TodoService } from '../services/todo.service';
+import { CategoryService } from '../services/category.service';
+import { TaskService } from '../services/task.service';
 import { CategoryModalComponent } from './components/category-modal/category-modal.component';
+import { NotificationService } from '../services/notification.Service';
 
 @Component({
   selector: 'app-categories',
@@ -35,8 +37,10 @@ import { CategoryModalComponent } from './components/category-modal/category-mod
 })
 export class CategoriesPage {
 
-  private todoService = inject(TodoService);
+  private categoryService = inject(CategoryService);
+  private taskService = inject(TaskService);
   private modalCtrl = inject(ModalController);
+  private notificationService = inject(NotificationService);
 
   categories: string[] = [];
 
@@ -46,7 +50,7 @@ export class CategoriesPage {
   }
 
   refreshCategories() {
-    this.categories = this.todoService.getCategories();
+    this.categories = this.categoryService.getCategories();
   }
 
   async openAddModal() {
@@ -63,10 +67,29 @@ export class CategoriesPage {
 
     const { data } = await modal.onDidDismiss();
 
-    if (data?.category) {
-      this.todoService.addCategory(data.category);
-      this.refreshCategories();
+    if (!data?.category) {
+      return;
     }
+
+    const created =
+      this.categoryService.addCategory(
+        data.category
+      );
+
+    if (!created) {
+
+      await this.notificationService.warning(
+        'La categoría ya existe.'
+      );
+
+      return;
+    }
+
+    this.refreshCategories();
+
+    await this.notificationService.success(
+      'Categoría creada correctamente.'
+    );
   }
 
   async openEditModal(index: number) {
@@ -84,17 +107,41 @@ export class CategoriesPage {
     const { data } = await modal.onDidDismiss();
 
     if (data?.category) {
-      this.todoService.editCategory(
+      const result = this.categoryService.editCategory(
         index,
         data.category
       );
+
+      if (result) {
+        this.taskService.updateTasksCategory(result.oldName, result.newName);
+
+        await this.notificationService.success(
+        'Categoría actualizada correctamente.'
+        );
+      }
 
       this.refreshCategories();
     }
   }
 
-  removeCategory(index: number) {
-    this.todoService.removeCategory(index);
+  async removeCategory(index: number) {
+    const removedCategory =
+      this.categoryService.removeCategory(index);
+
+    if (!removedCategory) {
+      return;
+    }
+
+    this.taskService.removeTasksByCategory(
+      removedCategory
+    );
+
+
     this.refreshCategories();
+
+    await this.notificationService.success(
+    'Categoría eliminada correctamente'
+    );
   }
+
 }

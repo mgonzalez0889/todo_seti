@@ -2,6 +2,10 @@
   padding: 16px;
 }
 
+ion-button {
+  --border-radius: 8px;
+}
+
 .completed {
   opacity: 0.6;
 }
