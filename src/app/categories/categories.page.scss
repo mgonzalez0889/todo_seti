@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+ion-button {
+  --border-radius: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
