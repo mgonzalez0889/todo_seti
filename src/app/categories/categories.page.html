@@ -6,48 +6,74 @@
 
 <ion-content class="ion-padding">
 
-  <ion-button
-    expand="block"
-    class="ion-margin-bottom"
-    (click)="openAddModal()">
-    Agregar categoría
-  </ion-button>
-  @if (categories.length) {
-    <ion-list>
+  <ion-list>
 
-      @for(category of categories; track $index) {
+    @for(category of categories; track category; let i = $index) {
 
-        <ion-item>
+      <ion-item>
 
-          <ion-label>
+        <ion-label>
+
+          <h2>
             {{ category }}
-          </ion-label>
+          </h2>
 
-          <ion-button
-            slot="end"
-            fill="clear"
-            color="primary"
-            (click)="openEditModal($index)">
-            Editar
-          </ion-button>
+          <ion-chip>
+            <ion-label>
+              Categoría
+            </ion-label>
+          </ion-chip>
 
-          <ion-button
-            slot="end"
-            fill="clear"
-            color="danger"
-            (click)="removeCategory($index)">
-            Eliminar
-          </ion-button>
+        </ion-label>
 
-        </ion-item>
+        <ion-button
+          class="action-btn edit-btn"
+          fill="clear"
+          (click)="openEditModal(i)">
 
-      }
+          <ion-icon
+            name="create-outline">
+          </ion-icon>
 
-    </ion-list>
-  }@else {
-  <p class="ion-text-center ion-margin-top">
-    No hay categorías
-  </p>
+        </ion-button>
+
+        <ion-button
+          class="action-btn delete-btn"
+          fill="clear"
+          (click)="removeCategory(i)">
+
+          <ion-icon
+            name="trash-outline">
+          </ion-icon>
+
+        </ion-button>
+
+      </ion-item>
+
+    }
+
+  </ion-list>
+
+  @if(categories.length === 0) {
+
+    <p class="ion-text-center ion-margin-top">
+      No hay categorías registradas
+    </p>
+
   }
+
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end">
+
+    <ion-fab-button
+      (click)="openAddModal()">
+
+      <ion-icon name="add"></ion-icon>
+
+    </ion-fab-button>
+
+  </ion-fab>
 
 </ion-content>

@@ -10,20 +10,21 @@ import {
   IonList,
   IonTitle,
   IonToolbar,
-  ModalController
-} from '@ionic/angular/standalone';
+  ModalController, IonFab, IonFabButton, IonIcon, IonChip } from '@ionic/angular/standalone';
 
 import { CategoryService } from '../services/category.service';
 import { TaskService } from '../services/task.service';
 import { CategoryModalComponent } from './components/category-modal/category-modal.component';
 import { NotificationService } from '../services/notification.service';
+import { add, createOutline, trashOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.page.html',
   styleUrls: ['./categories.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonChip, IonIcon, IonFabButton, IonFab,
     CommonModule,
     IonHeader,
     IonToolbar,
@@ -46,6 +47,11 @@ export class CategoriesPage {
 
 
   constructor() {
+    addIcons({
+      add,
+      createOutline,
+      trashOutline
+    });
     this.refreshCategories();
   }
 

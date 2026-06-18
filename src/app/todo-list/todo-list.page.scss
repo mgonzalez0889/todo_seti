@@ -2,15 +2,39 @@
   padding: 16px;
 }
 
-ion-button {
-  --border-radius: 8px;
-}
 
 .completed {
-  opacity: 0.6;
+  opacity: .6;
+  transform: scale(.98);
+  transition: all .3s ease;
+}
+
+ion-item {
+  margin-bottom: 10px;
+  border-radius: 12px;
+  --background: var(--ion-color-light);
 }
 
 .strike {
   text-decoration: line-through;
   color: var(--ion-color-medium);
+}
+
+.action-btn {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  min-width: 40px;
+  height: 40px;
+}
+
+.action-btn ion-icon {
+  font-size: 1.5rem;
+}
+
+.complete-btn {
+  --color: var(--ion-color-success);
+}
+
+.delete-btn {
+  --color: var(--ion-color-medium);
 }

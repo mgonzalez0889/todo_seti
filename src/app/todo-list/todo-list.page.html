@@ -6,13 +6,18 @@
 
 <ion-content class="ion-padding">
 
-  <ion-button
-    expand="block"
-    class="ion-margin-bottom"
-    [disabled]="categories.length === 0"
-    (click)="openTaskModal()">
-    Nueva tarea
-  </ion-button>
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end">
+
+    <ion-fab-button
+      [disabled]="categories.length === 0"
+      (click)="openTaskModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
 
   <ion-item>
 
@@ -53,29 +58,35 @@
             {{ task.title }}
           </h2>
 
-          <p>
+        <ion-chip>
+          <ion-label>
             {{ task.category }}
-          </p>
+          </ion-label>
+        </ion-chip>
 
         </ion-label>
 
         <ion-button
-          slot="end"
+          class="action-btn complete-btn"
           fill="clear"
-          color="success"
           (click)="toggleComplete(task.id)">
 
-          {{ task.completed ? 'Deshacer' : 'Completar' }}
+          <ion-icon
+            [name]="task.completed
+              ? 'arrow-undo-outline'
+              : 'checkmark-outline'">
+          </ion-icon>
 
         </ion-button>
 
         <ion-button
-          slot="end"
+          class="action-btn delete-btn"
           fill="clear"
-          color="danger"
           (click)="deleteTask(task.id)">
 
-          Eliminar
+          <ion-icon
+            name="trash-outline">
+          </ion-icon>
 
         </ion-button>
 

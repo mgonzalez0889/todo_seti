@@ -13,20 +13,21 @@ import {
   IonSelectOption,
   IonTitle,
   IonToolbar,
-  ModalController
-} from '@ionic/angular/standalone';
+  ModalController, IonFabButton, IonFab, IonIcon, IonChip } from '@ionic/angular/standalone';
 
 import { TaskModalComponent } from './components/task-modal/task-modal.component';
 import { TaskService, TodoTask } from '../services/task.service';
 import { CategoryService } from '../services/category.service';
 import { NotificationService } from '../services/notification.service';
+import { addIcons } from 'ionicons';
+import { add, arrowUndoOutline, checkmarkCircleOutline, checkmarkOutline, trashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.page.html',
   styleUrls: ['./todo-list.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonChip, IonIcon, IonFab, IonFabButton,
     CommonModule,
     FormsModule,
     IonHeader,
@@ -55,6 +56,13 @@ export class TodoListPage {
   private notificationService = inject(NotificationService);
 
   constructor() {
+    addIcons({
+      add,
+      trashOutline,
+      checkmarkOutline,
+      arrowUndoOutline
+  });
+
     this.loadData();
   }
 
