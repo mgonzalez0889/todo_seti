@@ -1,129 +1,167 @@
 # TODO-LIST
 
-Proyecto Ionic/Cordova para la aplicación TODO-LIST.
+Aplicación TODO-LIST desarrollada con **Ionic + Cordova + Angular**.
 
-## Repositorio
+Repositorio:
+https://github.com/mgonzalez0889/todo_seti.git
 
-El código está alojado en GitHub en:
+---
 
-`https://github.com/mgonzalez0889/todo_seti.git`
+# 📦 Requisitos
 
-## Requisitos previos
-
-- Node.js (versión moderna)
+- Node.js LTS
 - npm
-- Cordova CLI instalado globalmente:
-  ```bash
-  npm install -g cordova
-  ```
-- Java JDK instalado
-- Android SDK instalado y configurado:
-  - `ANDROID_HOME` apuntando a tu SDK
-  - `ANDROID_SDK_ROOT` opcional
-- Android Studio instalado para emuladores y depuración
-- Xcode instalado para compilación en iOS (macOS solamente)
+- Cordova CLI (opcional global)
 
-## Instalación
+```bash
+npm install -g cordova
+```
 
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/mgonzalez0889/todo_seti.git
-   cd todo_app_seti
-   ```
+- Java JDK 11 o superior
+- Android SDK configurado (`ANDROID_HOME`)
+- Android Studio (opcional para emuladores)
+- Xcode (solo macOS para iOS)
 
-2. Instala dependencias:
-   ```bash
-   npm install
-   ```
+---
 
-## Android
+# 📥 Instalación
 
-### Compilar
+```bash
+git clone https://github.com/mgonzalez0889/todo_seti.git
+cd todo_seti
+npm install
+```
 
-En la raíz del proyecto:
+---
+
+# ⚙️ Configuración inicial de Cordova
+
+## Opción 1: usando npx (sin instalación global)
+
+```bash
+npx cordova platform add android
+```
+
+## Opción 2: usando Cordova global
+
+```bash
+cordova platform add android
+```
+
+---
+
+# 📱 Ejecutar en Android (modo debug)
+
+## Con npx
+
+```bash
+npx cordova run android
+```
+
+## Con Cordova global
+
+```bash
+cordova run android
+```
+
+---
+
+# ⚡ Live Reload (desarrollo)
+
+## Con npx
+
+```bash
+npx cordova run android -l --external
+```
+
+## Con Cordova global
+
+```bash
+cordova run android -l --external
+```
+
+---
+
+# 📦 Build APK (debug)
+
+## Con npx
 
 ```bash
 npx cordova build android
 ```
 
-O usando el script ya preparado:
+## Con Cordova global
 
 ```bash
-.\build.bat
+cordova build android
 ```
 
-### Ejecutar en emulador o dispositivo
+---
 
-Si ya tienes un emulador Android activo o un dispositivo conectado:
+# 🚀 Build APK (release)
 
-```bash
-adb install -r platforms/android/app/build/outputs/apk/debug/app-debug.apk
-```
-
-### Abrir en Android Studio
-
-1. Abre Android Studio.
-2. Selecciona **Open** o **Open existing project**.
-3. Navega a `platforms/android` y abre esa carpeta.
-4. Espera a que Gradle sincronice.
-5. Ejecuta el proyecto con **Run > Run 'app'** seleccionando un emulador o dispositivo.
-
-## iOS
-
-> Nota: Solo disponible en macOS con Xcode instalado.
-
-### Compilar
-
-```bash
-npx cordova build ios
-```
-
-### Ejecutar en Xcode
-
-1. Abre `platforms/ios` en Xcode.
-2. Selecciona el esquema `App` o el objetivo correcto.
-3. Elige un simulador o dispositivo.
-4. Presiona el botón de ejecutar.
-
-## Firmar APK de release
-
-Para entregar un build de producción necesitas generar la versión release y firmarla.
+## Con npx
 
 ```bash
 npx cordova build android --release
 ```
 
-El APK resultante estará en:
+## Con Cordova global
 
-```text
-platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+```bash
+cordova build android --release
 ```
 
-Para publicar en Google Play, firma y alinea el APK con tu keystore.
+---
 
-## Versionado de código
+# 🔐 Ubicación del APK generado
 
-Debes subir al repositorio:
+platforms/android/app/build/outputs/apk/
 
-- `src/`
-- `resources/`
-- `config.xml`
-- `package.json`
-- `angular.json`
-- `tsconfig.json`
-- `.gitignore`
+---
 
-No es necesario subir:
+# 📱 Ejecutar APK manual (opcional)
 
-- `node_modules/`
-- `platforms/`
-- `plugins/`
-- `www/`
-- `.gradle/`
-- `build/`
+adb install -r platforms/android/app/build/outputs/apk/debug/app-debug.apk
 
-## Notas
+---
 
-- La carpeta `resources/` contiene iconos y splash screens necesarios para Android e iOS.
-- Si haces cambios en el código, vuelve a compilar con `npx cordova build android` antes de ejecutar.
-- Para Android Studio usa siempre la carpeta `platforms/android`.
+# 🧠 Abrir en Android Studio
+
+1. Abrir Android Studio
+2. Open Project
+3. Seleccionar:
+   platforms/android
+4. Esperar Gradle sync
+5. Run
+
+---
+
+# 📌 Estructura del proyecto (versionado)
+
+Se debe subir:
+
+- src/
+- resources/
+- config.xml
+- package.json
+- angular.json
+- tsconfig.json
+- .gitignore
+
+No subir:
+
+- node_modules/
+- platforms/
+- plugins/
+- www/
+- build/
+
+---
+
+# ⚠️ Notas
+
+- Ejecutar `cordova platform add android` la primera vez.
+- Ejecutar `cordova build` después de cambios.
+- No modificar `platforms/` manualmente.
+- Proyecto reproducible desde cero.
