@@ -6,38 +6,14 @@
 
 <ion-content class="ion-padding">
 
-  <ion-item>
-    <ion-label position="floating">Nueva tarea</ion-label>
-    <ion-input
-      [(ngModel)]="newTaskTitle"
-      placeholder="Ingresa una nueva tarea">
-    </ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Categoría</ion-label>
-
-    <ion-select [(ngModel)]="newTaskCategory">
-
-      @for(category of categories; track category) {
-
-        <ion-select-option [value]="category">
-          {{ category }}
-        </ion-select-option>
-
-      }
-
-    </ion-select>
-  </ion-item>
-
   <ion-button
     expand="block"
-    class="ion-margin-top"
-    (click)="addTask()">
-    Agregar tarea
+    class="ion-margin-bottom"
+    (click)="openTaskModal()">
+    Nueva tarea
   </ion-button>
 
-  <ion-item class="ion-margin-top">
+  <ion-item>
 
     <ion-label>
       Filtrar por categoría
