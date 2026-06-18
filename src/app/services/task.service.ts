@@ -11,8 +11,32 @@ export interface TodoTask {
   providedIn: 'root',
 })
 export class TaskService {
+  private readonly STORAGE_KEY = 'tasks';
   private tasks: TodoTask[] = [];
-  private taskIdCounter = 4;
+
+  constructor() {
+    this.loadTasks();
+  }
+
+  private loadTasks(): void {
+
+    const data = localStorage.getItem(
+      this.STORAGE_KEY
+    );
+
+    if (data) {
+      this.tasks = JSON.parse(data);
+    }
+  }
+
+  private saveTasks(): void {
+
+    localStorage.setItem(
+      this.STORAGE_KEY,
+      JSON.stringify(this.tasks)
+    );
+  }
+
 
   getTasks(): TodoTask[] {
     return [...this.tasks];
@@ -25,13 +49,16 @@ export class TaskService {
     }
 
     const newTask: TodoTask = {
-      id: String(this.taskIdCounter++),
+      id: crypto.randomUUID(),
       title: trimmed,
       category: category,
       completed: false,
     };
 
     this.tasks.push(newTask);
+
+    this.saveTasks();
+
     return newTask;
   }
 
@@ -39,20 +66,26 @@ export class TaskService {
     const index = this.tasks.findIndex((task) => task.id === taskId);
     if (index >= 0) {
       this.tasks.splice(index, 1);
+      this.saveTasks();
     }
   }
 
   toggleTaskComplete(taskId: string): void {
     const task = this.tasks.find((item) => item.id === taskId);
+
     if (task) {
       task.completed = !task.completed;
+      this.saveTasks();
     }
+
   }
 
   assignCategory(taskId: string, category: string): void {
     const task = this.tasks.find((item) => item.id === taskId);
     if (task) {
       task.category = category;
+
+      this.saveTasks();
     }
   }
 
@@ -69,11 +102,14 @@ export class TaskService {
         task.category = newName;
       }
     });
+    this.saveTasks();
   }
 
   removeTasksByCategory(category: string): void {
     this.tasks = this.tasks.filter(
       task => task.category !== category
     );
+
+    this.saveTasks();
   }
 }
