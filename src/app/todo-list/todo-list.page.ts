@@ -19,7 +19,7 @@ import {
 import { TaskModalComponent } from './components/task-modal/task-modal.component';
 import { TaskService, TodoTask } from '../services/task.service';
 import { CategoryService } from '../services/category.service';
-import { NotificationService } from '../services/notification.Service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-todo-list',

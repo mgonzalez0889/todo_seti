@@ -16,7 +16,7 @@ import {
 import { CategoryService } from '../services/category.service';
 import { TaskService } from '../services/task.service';
 import { CategoryModalComponent } from './components/category-modal/category-modal.component';
-import { NotificationService } from '../services/notification.Service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-categories',
