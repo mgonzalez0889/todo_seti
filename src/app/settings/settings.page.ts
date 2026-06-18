@@ -3,6 +3,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonTogg
 import { ThemeService } from '../services/theme.service';
 import { addIcons } from 'ionicons';
 import { moonOutline } from 'ionicons/icons';
+import { RemoteConfigService } from '../services/remote-config.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,13 +14,18 @@ import { moonOutline } from 'ionicons/icons';
 })
 export class SettingsPage {
   private themeService = inject(ThemeService);
+  private remoteConfigService =  inject(RemoteConfigService);
+  public showDarkMode = false;
 
   isDarkMode = false;
   constructor() {
-  addIcons({
-    moonOutline
-  });
-  this.isDarkMode =  this.themeService.isDarkMode();
+
+    addIcons({
+      moonOutline
+    });
+
+    this.isDarkMode =  this.themeService.isDarkMode();
+    this.showDarkMode = this.remoteConfigService.isDarkModeEnabled();
 
   }
 
@@ -27,8 +33,7 @@ export class SettingsPage {
     this.isDarkMode =
       event.detail.checked;
 
-    this.themeService.toggleTheme(
-      this.isDarkMode
-    );
+    this.themeService.toggleTheme( this.isDarkMode );
   }
+
 }

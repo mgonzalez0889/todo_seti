@@ -12,26 +12,29 @@
       <ion-label>Apariencia</ion-label>
     </ion-list-header>
 
-    <ion-item>
+    @if (showDarkMode) {
+      <ion-item>
 
-      <ion-icon
-        class="settings-icon"
-        slot="start"
-        name="moon-outline">
-      </ion-icon>
+        <ion-icon
+          class="settings-icon"
+          slot="start"
+          name="moon-outline">
+        </ion-icon>
 
-      <ion-label>
+        <ion-label>
 
-        <h2>Tema</h2>
+          <h2>Tema</h2>
 
-      </ion-label>
+        </ion-label>
 
-      <ion-toggle
-        [checked]="isDarkMode"
-        (ionChange)="toggleTheme($event)">
-      </ion-toggle>
+        <ion-toggle
+          [checked]="isDarkMode"
+          (ionChange)="toggleTheme($event)">
+        </ion-toggle>
 
-    </ion-item>
+      </ion-item>
+    }
+
 
   </ion-list>
 
