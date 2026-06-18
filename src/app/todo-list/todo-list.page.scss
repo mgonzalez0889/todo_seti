@@ -1,0 +1,12 @@
+.todo-list-page {
+  padding: 16px;
+}
+
+.completed {
+  opacity: 0.6;
+}
+
+.strike {
+  text-decoration: line-through;
+  color: var(--ion-color-medium);
+}

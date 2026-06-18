@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>To Do List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label position="floating">Nueva tarea</ion-label>
+    <ion-input
+      [(ngModel)]="newTaskTitle"
+      placeholder="Ingresa una nueva tarea">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Categoría</ion-label>
+
+    <ion-select [(ngModel)]="newTaskCategory">
+
+      @for(category of categories; track category) {
+
+        <ion-select-option [value]="category">
+          {{ category }}
+        </ion-select-option>
+
+      }
+
+    </ion-select>
+  </ion-item>
+
+  <ion-button
+    expand="block"
+    class="ion-margin-top"
+    (click)="addTask()">
+    Agregar tarea
+  </ion-button>
+
+  <ion-item class="ion-margin-top">
+
+    <ion-label>
+      Filtrar por categoría
+    </ion-label>
+
+    <ion-select
+      [(ngModel)]="selectedCategory"
+      placeholder="Todas"
+      (ionChange)="applyFilter()">
+
+      <ion-select-option value="">
+        Todas
+      </ion-select-option>
+
+      @for(category of categories; track category) {
+
+        <ion-select-option [value]="category">
+          {{ category }}
+        </ion-select-option>
+
+      }
+
+    </ion-select>
+
+  </ion-item>
+
+  <ion-list class="ion-margin-top">
+
+    @for(task of filteredTasks; track task.id) {
+
+      <ion-item [class.completed]="task.completed">
+
+        <ion-label>
+
+          <h2 [class.strike]="task.completed">
+            {{ task.title }}
+          </h2>
+
+          <p>
+            {{ task.category }}
+          </p>
+
+        </ion-label>
+
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="success"
+          (click)="toggleComplete(task.id)">
+
+          {{ task.completed ? 'Deshacer' : 'Completar' }}
+
+        </ion-button>
+
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="danger"
+          (click)="deleteTask(task.id)">
+
+          Eliminar
+
+        </ion-button>
+
+      </ion-item>
+
+    }
+
+  </ion-list>
+
+  @if(filteredTasks.length === 0) {
+
+    <p class="ion-text-center ion-margin-top">
+      No hay tareas en esta categoría
+    </p>
+
+  }
+
+</ion-content>
