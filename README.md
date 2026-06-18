@@ -135,30 +135,6 @@ adb install -r platforms/android/app/build/outputs/apk/debug/app-debug.apk
 4. Esperar Gradle sync
 5. Run
 
----
-
-# 📌 Estructura del proyecto (versionado)
-
-Se debe subir:
-
-- src/
-- resources/
-- config.xml
-- package.json
-- angular.json
-- tsconfig.json
-- .gitignore
-
-No subir:
-
-- node_modules/
-- platforms/
-- plugins/
-- www/
-- build/
-
----
-
 # ⚠️ Notas
 
 - Ejecutar `cordova platform add android` la primera vez.
