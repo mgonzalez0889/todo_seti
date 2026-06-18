@@ -68,3 +68,16 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Android & Gradle
+.gradle/
+build/
+*.apk
+*.aab
+*.jks
+local.properties
+
+# Environment variables
+.env
+.env.local
+

@@ -1,5 +1,7 @@
 {
   "name": "todo_app_seti",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular-standalone"
 }
