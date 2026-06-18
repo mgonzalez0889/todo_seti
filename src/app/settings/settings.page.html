@@ -6,4 +6,49 @@
 
 <ion-content class="ion-padding">
 
+  <ion-list inset="true">
+
+    <ion-list-header>
+      <ion-label>Apariencia</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+
+      <ion-icon
+        class="settings-icon"
+        slot="start"
+        name="moon-outline">
+      </ion-icon>
+
+      <ion-label>
+
+        <h2>Tema</h2>
+
+      </ion-label>
+
+      <ion-toggle
+        [checked]="isDarkMode"
+        (ionChange)="toggleTheme($event)">
+      </ion-toggle>
+
+    </ion-item>
+
+  </ion-list>
+
+  <ion-card>
+
+    <ion-card-header>
+
+      <ion-card-title>
+        To Do App
+      </ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      Aplicación para la gestión de tareas.
+    </ion-card-content>
+
+  </ion-card>
+
 </ion-content>
