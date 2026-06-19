@@ -6,56 +6,56 @@
 
 <ion-content class="ion-padding">
 
-  <ion-list>
+  @if (categories.length) {
 
-    @for(category of categories; track category; let i = $index) {
+    <ion-list>
 
-      <ion-item>
+      @for(category of categories; track category; let i = $index) {
 
-        <ion-label>
+        <ion-item>
 
-          <h2>
-            {{ category }}
-          </h2>
+          <ion-label>
 
-          <ion-chip>
-            <ion-label>
-              Categoría
-            </ion-label>
-          </ion-chip>
+            <h2>
+              {{ category }}
+            </h2>
 
-        </ion-label>
+            <ion-chip>
+              <ion-label>
+                Categoría
+              </ion-label>
+            </ion-chip>
 
-        <ion-button
-          class="action-btn edit-btn"
-          fill="clear"
-          (click)="openEditModal(i)">
+          </ion-label>
 
-          <ion-icon
-            name="create-outline">
-          </ion-icon>
+          <ion-button
+            class="action-btn edit-btn"
+            fill="clear"
+            (click)="openEditModal(i)">
 
-        </ion-button>
+            <ion-icon
+              name="create-outline">
+            </ion-icon>
 
-        <ion-button
-          class="action-btn delete-btn"
-          fill="clear"
-          (click)="removeCategory(i)">
+          </ion-button>
 
-          <ion-icon
-            name="trash-outline">
-          </ion-icon>
+          <ion-button
+            class="action-btn delete-btn"
+            fill="clear"
+            (click)="removeCategory(i)">
 
-        </ion-button>
+            <ion-icon
+              name="trash-outline">
+            </ion-icon>
 
-      </ion-item>
+          </ion-button>
 
-    }
+        </ion-item>
 
-  </ion-list>
+      }
 
-  @if(categories.length === 0) {
-
+    </ion-list>
+  }@else {
     <p class="ion-text-center ion-margin-top">
       No hay categorías registradas
     </p>

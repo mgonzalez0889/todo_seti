@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>To Do List</ion-title>
+    <ion-title>Tareas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -46,58 +46,58 @@
 
   </ion-item>
 
-  <ion-list class="ion-margin-top">
+  @if (filteredTasks.length) {
+      <ion-list class="ion-margin-top">
 
-    @for(task of filteredTasks; track task.id) {
+      @for(task of filteredTasks; track task.id) {
 
-      <ion-item [class.completed]="task.completed">
+        <ion-item [class.completed]="task.completed">
 
-        <ion-label>
-
-          <h2 [class.strike]="task.completed">
-            {{ task.title }}
-          </h2>
-
-        <ion-chip>
           <ion-label>
-            {{ task.category }}
+
+            <h2 [class.strike]="task.completed">
+              {{ task.title }}
+            </h2>
+
+          <ion-chip>
+            <ion-label>
+              {{ task.category }}
+            </ion-label>
+          </ion-chip>
+
           </ion-label>
-        </ion-chip>
 
-        </ion-label>
+          <ion-button
+            class="action-btn complete-btn"
+            fill="clear"
+            (click)="toggleComplete(task.id)">
 
-        <ion-button
-          class="action-btn complete-btn"
-          fill="clear"
-          (click)="toggleComplete(task.id)">
+            <ion-icon
+              [name]="task.completed
+                ? 'arrow-undo-outline'
+                : 'checkmark-outline'">
+            </ion-icon>
 
-          <ion-icon
-            [name]="task.completed
-              ? 'arrow-undo-outline'
-              : 'checkmark-outline'">
-          </ion-icon>
+          </ion-button>
 
-        </ion-button>
+          <ion-button
+            class="action-btn delete-btn"
+            fill="clear"
+            (click)="deleteTask(task.id)">
 
-        <ion-button
-          class="action-btn delete-btn"
-          fill="clear"
-          (click)="deleteTask(task.id)">
+            <ion-icon
+              name="trash-outline">
+            </ion-icon>
 
-          <ion-icon
-            name="trash-outline">
-          </ion-icon>
+          </ion-button>
 
-        </ion-button>
+        </ion-item>
 
-      </ion-item>
+      }
 
-    }
+    </ion-list>
 
-  </ion-list>
-
-  @if(filteredTasks.length === 0) {
-
+  }@else {
     <p class="ion-text-center ion-margin-top">
       No hay tareas
     </p>
